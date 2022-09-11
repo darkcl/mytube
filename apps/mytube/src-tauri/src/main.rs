@@ -6,6 +6,11 @@
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
 fn greet(name: &str) -> String {
+    use std::process::Command;
+
+    let output = Command::new("ls").output().expect("Error!!");
+    let ls_list = String::from_utf8(output.stdout);
+    println!("{:?}", ls_list);
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
